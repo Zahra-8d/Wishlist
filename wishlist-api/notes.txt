@@ -1,0 +1,96 @@
+Tables
+----------
+
+1. Lists 
+    id
+    owner_id (user id)
+    name
+    description
+    date
+
+CREATE TABLE lists(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(125),
+description VARCHAR(125),
+owner_id INT(10),
+date DATE
+);
+
+curl -X POST \
+ http://localhost:4040/lists/new \
+ -H "Content-Type: application/json" \
+ -d '{"name":"list NAME!", "description":"this is a list desc"}'
+
+2. Users
+    id
+    name
+    email
+    password
+
+CREATE TABLE users(
+id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(125),
+access INT(10),
+password VARCHAR(256)
+);
+
+INSERT INTO `users` (`username`, `access`,`password`) VALUES ('admin', 1, ENCODE('admin123', '685123B95823B8B6'));
+INSERT INTO `users` (`username`, `access`,`password`) VALUES ('user', 2, ENCODE('user123', '685123B95823B8B6'));
+
+SELECT username, DECODE(`password`, '685123B95823B8B6') AS `password` FROM users;
+
+curl -X POST \
+ http://localhost:4040/users/new \
+ -H "Content-Type: application/json" \
+ -d '{"name":"Nurahmat", "email":"nurahmat@gmail.com"}'
+
+3. Gifts
+    id
+    list_id
+    name
+    description
+    url
+    checked (bool)
+    checked_by (user id)
+    checked_date
+
+CREATE TABLE gifts(
+id INT AUTO_INCREMENT PRIMARY KEY,
+list_id INT(10),
+name VARCHAR(125),
+description VARCHAR(125),
+url VARCHAR(125),
+checked BOOLEAN,
+owner_by INT(10),
+checked_date DATE
+);
+
+//to test add
+
+curl -X POST \
+ http://localhost:4040/gifts/new \
+ -H "Content-Type: application/json" \
+ -d '{"name":"NAME!", "description":"this is a gift desc"}'
+
+front end Routes
+-----------------
+/ 
+search for a list / user
+show list of lists and make searchable
+log in details. When logged in takes you to /user_name
+
+/user_name
+
+shows a list of Lists
+new list button (only if logged in as user)
+    - option to make it password protected
+    - options for collecting user email address
+
+/user_name/list_name
+
+
+shows a list of gifts associated with list 
+checkboxes next to each item to mark as buying / bought 
+    - text field appears to add name (email?) if checked
+    - once confirmed it should add a user with name and table to the users table
+is this page publicly open? 
