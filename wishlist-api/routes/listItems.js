@@ -23,27 +23,36 @@ router.get('/list_all', function(req, res) {
     let sql = `SELECT * FROM list_items WHERE list_id = `+ req.body.list_id;
     db.query(sql, function(err, data, fields) {
       if (err) throw err;
-      data.forEach((item, i) => {
+      let counter = 0;
+      let items = []
+      data.forEach((item) => {
         getLinkPreview(item['url'], {
           imagesPropertyType: "og", // fetches only open-graph images
-          // headers: {
-          //   "user-agent": "Firefox/64.0" // fetches with googlebot crawler user agent
-          // }
+          headers: {
+            "user-agent": "Firefox/64.0" // fetches with googlebot crawler user agent
+          }
         })
         .then((preview_data) => {
-          console.log(preview_data)
-          data[i].url_title = preview_data.title;
-          data[i].url_site = preview_data.siteName;
-          data[i].url_description = preview_data.description;
-          data[i].url_image = preview_data.images;
-
-          if (i == data.length - 1) {
+          let list_item = {
+            url_title: preview_data.title,
+            url_site: preview_data.siteName,
+            url_description: preview_data.description,
+            url_image: preview_data.images[0],
+            url: item['url'],
+            price: item['price'],
+            name: item['name'],
+            id: item['id']
+          }
+          items.push(list_item)
+        }).then(() => {
+          if (counter == data.length - 1) {
             res.json({
               status: 200,
-              data,
+              items,
               message: "List items retrieved successfully"
             })
           }
+          counter += 1;
         })
         .catch(err => {
           console.log(err);

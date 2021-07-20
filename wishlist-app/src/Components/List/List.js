@@ -55,9 +55,9 @@ class List extends React.Component {
     .then(response => response.json())
     .then(response => {
       this.setState({ 
-        listItems: response.data, 
-        ListItemCheckedCount: response.data.filter(x => x.checked === 1).length, 
-        listItemCount: response.data.length 
+        listItems: response.items, 
+        ListItemCheckedCount: response.items.filter(x => x.checked === 1).length, 
+        listItemCount: response.items.length 
       })
     })
     .catch(err => {
@@ -110,6 +110,7 @@ class List extends React.Component {
       })
       .then(response => response.json())
       .then(response => {
+        console.log(response)
         this.setState({ listName: response.data[0].name })
       })
       .catch(err => {
@@ -127,8 +128,17 @@ class List extends React.Component {
           {this.state.listItems.map(listItem =>
             (
               <div key={listItem.id} id={'list-item-id-' + listItem.id} className="list-item-container list-instance">
-                <h3>{listItem.name}</h3> 
-                  <h5>{listItem.price}</h5>
+                  <div>
+                    <h3>{listItem.name}</h3> 
+                    <h3>{'£' + listItem.price}</h3>
+                  </div>
+                  {
+                    listItem.url_image? <img src={listItem.url_image} alt={listItem.url_title} className="list-item-image" height='300' />: <div className="empty-image"></div>
+                  }
+                  <div className="link-details">
+                    <h4>{listItem.url_title || listItem.name}</h4>
+                    <h5>{listItem.url_description}</h5>
+                  </div>
                   <input 
                     type="checkbox" 
                     name="listItemChecked" 
