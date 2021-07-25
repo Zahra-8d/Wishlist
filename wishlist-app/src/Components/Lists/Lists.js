@@ -38,9 +38,11 @@ export default function Lists() {
         {lists.map(list =>
           (
             <div key={list.id} className="list-container list-item" onClick={() => openList(list.id)}>
-              <h3>{list.name}</h3>
-              <h5>{convertUnixDate(list.date)}</h5>
-              <p>{list.description}</p>
+              <div className="inner-container">
+                <h3>{list.name}</h3>
+                <h5>{convertUnixDate(list.date)}</h5>
+                <p>{list.description}</p>
+              </div>
             </div>
           )
         )}  

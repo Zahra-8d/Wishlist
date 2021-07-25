@@ -56,9 +56,9 @@ export default function AddList(props) {
                 <span id="plus-button" className="plus" onClick={() => toggleFields(true)}></span>
             </div>
             <div id="add-list-new">
-                <input className="h3" placeholder="Enter name of list" name="name" type="text" />
+                <input placeholder="Enter name of list" name="name" type="text" />
                 <h5 className="add-new-date">{convertUnixDate(new Date()/1000)}</h5>
-                <input className="h3" placeholder="Enter description" type="text" name="desc" />
+                <input placeholder="Enter description" type="text" name="desc" />
                 <button className="add" onClick={() => addNewList(props)}>Add</button>
             </div>
         </div>

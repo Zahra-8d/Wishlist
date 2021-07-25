@@ -47,10 +47,10 @@ export default function App() {
 
   return (
     <div className="wrapper"> 
-      <a href="/" className="h1"><h1>Wishlist</h1></a>
       {(localStorage.getItem("accessLevel")) ? (
         <div>
-          <button onClick={Logout}>Logout</button>
+          <a href="/" className="h1"><h1>Wishlist</h1></a>
+          <button className="logout" onClick={Logout}>Logout</button>
           <BrowserRouter>
             <Switch>
               <Route exact path="/">
@@ -63,7 +63,10 @@ export default function App() {
           </BrowserRouter>
         </div>
       ): (
-        <LoginForm Login={Login} error={error} />
+        <div class="login-page">
+          <a href="/" className="h1"><h1>Wishlist</h1></a>
+          <LoginForm Login={Login} error={error} />
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,14 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+}
+
 #root {
-  margin:25px;
+  margin-top: 0 !important;
+  width: 100%;
+  min-height: 100vh;
+  background: #c9f8e4;
+  display: flex;
 }
 
 .wrapper {
@@ -7,19 +16,63 @@
   margin: auto;
 }
 
-h1, .h1 , h2, .h2 {
+.login-page {
+  padding: 4rem;
+  border: 2px solid white;
+}
+
+h1, .h1 {
   text-align: center;
   text-decoration: none;
   color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+a {
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: #ff4b98;
+}
+
+h2, .h2 {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 h3, .h3 {
   text-align: center;
   margin: 20px 0;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+}
+
+h4 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+h5 {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
 }
 
 .add-new-date {
-  margin: 0;
+  text-align: left;
+  font-size: 1em;
+  margin: 10px;
 }
 
 #all-lists {
@@ -28,20 +81,47 @@ h3, .h3 {
   flex-wrap: wrap;
 }
 
-.checked-details {
-  display: flex;
-  margin-top: 5px;
+.checked-details input {
+  border: 1px solid #bdbbbb;
+  height: 40px;
+  width: 78%;
+  margin: auto;
+  font-weight: 100;
+}
+
+.item-checked-details[data-checked="false"]:hover {
+  background: #2db99f;
+}
+
+.item-checked-details[data-checked="false"] {
+  background: #348475;
+  border-left: 1px solid #348475;
+  cursor: pointer;
+  transition: .3s linear all;
 }
 
 #add-list-new {
   display:none;
 }
 
+.inner-container {
+  border: 1px solid #348475;
+  padding: 10px 5px;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.inner-container.list-instance {
+  display: flex;
+  width: 100%;
+  margin: 2em;
+}
+
 .list-container {
   width: 24%;
   margin: 20px;
   background-color: #fff;
-  box-shadow: 0 0 2rem .3125rem rgba(0,0,0,.07);
+  box-shadow: 0 0 1rem .2rem rgba(0,0,0,.07);
   border-radius: 10px;
   padding: 2.125rem 1.75rem;
   text-align: center;
@@ -51,23 +131,40 @@ h3, .h3 {
 .list-item-container {
   margin: 20px;
   background-color: #fff;
-  box-shadow: 0 0 2rem .3125rem rgba(0,0,0,.07);
+  box-shadow: 0 0 1rem .2rem rgba(0,0,0,.07);
   border-radius: 10px;
-  padding: 0.5rem 1.75rem;
   text-align: center;
   transition: all .3s ease;
   display: flex;
 }
 
+#add-list {
+  display: block;
+  margin: 4em 0;
+}
+
+#add-list-item {
+  display: block;
+  width: 200px;
+  margin: 2rem auto;
+}
+
+#add-list-item-new {
+  display: block;
+  width: 500px;
+  margin: auto;
+  padding: 2rem;
+}
+
 .empty-image {
-  height: 270px;
-  width: 270px;
+  height: 200px;
+  width: 30%;
   background: #e7f7f7;
-  margin: 30px;
+  margin: 2em 15px;
 }
 
 .list-container.list-item:hover {
-  box-shadow: 5px 5px 2rem .5rem rgba(0,0,0,.07);
+  box-shadow: 4px 4px 1rem .5rem rgba(0,0,0,.07);
 }
 
 .list-container.list-item {
@@ -76,15 +173,17 @@ h3, .h3 {
 
 #add-list-item-new input, #add-list-new input {
   border: 1px solid #bdbbbb;
-  height: 25px;
+  height: 50px;
   width: 90%;
   padding: 0 10px;
   margin: 10px 0;
+  font-size: 1em;
 }
 
 .login-form {
   max-width: 500px;
   margin: auto;
+  margin-bottom: 4em;
 }
 
 input {
@@ -92,14 +191,37 @@ input {
   height: 25px;
   width: 100%;
   padding: 0 10px;
+  font-weight: 100;
 }
 
-.login-form input[type="submit"] {
+.logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  font-size: 18px;
+  margin: 25px !important;
+  padding: 0 0 0 10px;
+  width: 488px;
+}
+
+.login-form input[type="submit"], .logout {
   width: 100px;
   margin: 10px auto;
   text-align: center;
   float: right;
   padding: 0;
+  background: #ff4b98;
+  border: 1px solid #fd006b;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: .3s linear all;
+  font-weight: 300;
+}
+
+.login-form input[type="submit"]:hover {
+  background-color: #fd006b;
 }
 
 .login-form input {
@@ -108,6 +230,38 @@ input {
   margin: 10px 0;
   padding: 0 0 0 10px;
   width: 488px;
+}
+
+.link-details {
+  margin: 2em 15px;
+  width: 40%;
+}
+
+.item-checked-details {
+  width: 13%;
+  border-left: 1px solid #fd006b;
+  background: #ff4b98;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.list-item-image {
+  margin: 2em 15px;
+  width: 30%;
+  height: 200px !important;
+  object-fit: cover;
+}
+
+
+.list-item-name {
+  width: 17%;
+  height: 200px;
+  display: table-cell !important;
+  vertical-align: middle;
+  margin: 2em 15px;
 }
 
 .checked-details p {
@@ -120,9 +274,9 @@ input[type="checkbox"] {
 
 .add {
   display: block;
-  width: 40px;
-  height: 40px;
-  background: #8a8888;
+  width: 50px;
+  height: 50px;
+  background: #fd006b;
   border-radius: 50%;
   cursor: pointer;
   border: #fff;
@@ -139,7 +293,7 @@ input[type="checkbox"] {
   display:inline-block;
   width:50px;
   height:50px;
-  background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #8a8888;
+  background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #fd006b;
   background-position:center;
   background-size: 50% 2px,2px 50%;
   background-repeat:no-repeat;
@@ -153,10 +307,9 @@ input[type="checkbox"] {
 }
 
 .tick {
-  display:inline-block;
-  width:20px;
-  height:20px;
-  background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #8a8888;
+  width:40px;
+  height:40px;
+  background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #fd006b;
   background-position:center;
   background-size: 50% 2px,2px 50%;
   background-repeat:no-repeat;
@@ -165,7 +318,7 @@ input[type="checkbox"] {
   transition: all .3s ease;
   display: none;
   padding: 3px;
-  margin-left: 10px;
+  margin: 15px auto;
 }
 
 #add-list-item-new {
@@ -173,14 +326,163 @@ input[type="checkbox"] {
 }
 
 .add-item {
-    display: inline;
-    width: 40px;
-    height: 40px;
-    background: #8a8888;
-    border-radius: 50%;
-    cursor: pointer;
-    border: #fff;
-    color: #fff;
-    text-transform: uppercase;
+  display: inline;
+  width: 50px;
+  height: 50px;
+  background: #fd006b;
+  border-radius: 50%;
+  cursor: pointer;
+  border: #fff;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 10px;
+  font-size: 1em;
+}
+
+@media (max-width: 1000px) {
+  .list-container {
+    width: 35%;
+  }
+
+  h5 {
+    font-size: 17px;
+  }
+
+  h4 {
+    font-size: 22px;
+  }
+
+  h3, .h3 {
+    font-size: 1.5rem;
+  }
+
+  .list-item-name, .empty-image, .link-details, .list-item-image {
+    margin: 1em 10px;
+  }
+
+  .item-checked-details {
+    width: 17%;
+  }
+
+  .list-item-image {
+    width: 25%;
+  }
+
+  .empty-image {
+    width: 25%;
+  }
+
+  .item-checked-details {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 700px) {
+  .list-container {
+    width: 95%;
+  }
+
+  .login-page {
+    padding: 2rem;
+  }
+
+  .login-form input {
+    width: 100%;
+  }
+
+  .logout {
+    height: 35px;
+    font-size: 15px;
+    margin: 10px !important;
+    width: 75px;
+  }
+
+  h2, .h2 {
+    font-size: 1.8rem;
+  }
+
+  h1, .h1 {
+    font-size: 2.5rem;
+  }
+
+  h3, .h3 {
+    margin: 5px 0;
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+
+  h5 {
+    font-size: 16px;
+    display: none;
+  }
+
+  .inner-container.list-instance {
+    margin: 1em;
+  }
+
+  .inner-container.list-instance {
+    margin: 1em;
+    position: relative;
+    height: 395px;
+    width: 100%;
+  }
+
+  .list-item-name {
+    position: absolute;
+    top: 0;
+    height: 70px;
+    left: 0;
+    width: 98%;
+  }
+
+  .empty-image {
+    width: 98%;
+    position: absolute;
+    height: 175px;
+    top: 75px;
+  }
+
+  .list-item-image {
+    width: 98%;
+    position: absolute;
+    height: 175px !important;
+    top: 75px;
+  }
+
+  .item-checked-details {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+  }
+
+  .list-item-name, .empty-image, .link-details, .list-item-image {
+    margin: 0 1%;
+  }
+
+  .link-details {
+    position: absolute;
+    top: 255px;
+    width: 98%;
+  }
+
+  .wrapper {
+    width: 98%;
+  }
+
+  #check-item {
+    margin: 10px auto;
+  }
+
+  .promised-message {
     margin: 10px;
+  }
+
+  #add-list {
+    margin: 0em 0;
+  }
 }

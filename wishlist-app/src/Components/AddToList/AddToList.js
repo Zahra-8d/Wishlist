@@ -61,9 +61,9 @@ const AddToList = (props) => {
                 <span id="plus-button" className="plus" onClick={() => toggleFields(true)}></span>
             </div>
             <div id="add-list-item-new">
-                <input className="h3" placeholder="Enter name of item" name="name" type="text" />
-                <input className="h3" placeholder="Enter price" type="number" name="price" />
-                <input className="h3" placeholder="Enter item url" type="text" name="url" />
+                <input placeholder="Enter name of item" name="name" type="text" />
+                <input placeholder="Enter price" type="number" name="price" />
+                <input placeholder="Enter item url" type="text" name="url" />
                 <button className="add-item" onClick={() => addNewListItem(props)}>Add</button>
             </div>
         </div>

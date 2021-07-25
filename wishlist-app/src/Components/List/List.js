@@ -28,10 +28,10 @@ class List extends React.Component {
   }
 
   checkItem(listItemId) {
-    const checked = document.querySelector('#list-item-id-' + listItemId + ' input[name ="listItemChecked"]').checked,
+    const checked = document.querySelector('#list-item-id-' + listItemId + ' .item-checked-details').getAttribute('data-checked'),
       checked_by = document.querySelector('#list-item-id-' + listItemId + ' #checked-by-input'),
       check_button = document.querySelector('#list-item-id-' + listItemId + ' #check-item');
-    if (checked) {
+    if (checked === 'false') {
       checked_by.style.display = 'block';
       check_button.style.display = 'block';
     } else {
@@ -110,7 +110,6 @@ class List extends React.Component {
       })
       .then(response => response.json())
       .then(response => {
-        console.log(response)
         this.setState({ listName: response.data[0].name })
       })
       .catch(err => {
@@ -124,44 +123,43 @@ class List extends React.Component {
     return (
       <div>
         <h2>{this.state.listName}</h2>
+        <h3>{ this.state.listItems.length === 0 ? 'No items on the list!' : '' }</h3>
         <main id="all-list-items">
           {this.state.listItems.map(listItem =>
             (
-              <div key={listItem.id} id={'list-item-id-' + listItem.id} className="list-item-container list-instance">
-                  <div>
-                    <h3>{listItem.name}</h3> 
+              <div key={listItem.id} id={'list-item-id-' + listItem.id} className="list-item-container">
+                <div className="inner-container list-instance">
+                  <div className="list-item-name">
+                    <a href={listItem.url} target="_blank"><h3>{listItem.name}</h3></a> 
                     <h3>{'£' + listItem.price}</h3>
                   </div>
                   {
-                    listItem.url_image? <img src={listItem.url_image} alt={listItem.url_title} className="list-item-image" height='300' />: <div className="empty-image"></div>
+                    listItem.url_image? <img src={listItem.url_image} alt={listItem.url_title} className="list-item-image" />: <div className="empty-image"></div>
                   }
                   <div className="link-details">
-                    <h4>{listItem.url_title || listItem.name}</h4>
-                    <h5>{listItem.url_description}</h5>
+                  <a href={listItem.url} target="_blank"><h4>{listItem.url_title.substring(0, 70) || listItem.name}</h4></a>
+                    <h5>{listItem.url_description? listItem.url_description.substring(0, 70) + '...': ''}</h5>
                   </div>
-                  <input 
-                    type="checkbox" 
-                    name="listItemChecked" 
-                    defaultChecked = { listItem.checked ? true : false } 
-                    disabled = { listItem.checked ? true : false } 
-                    onChange = {() => this.checkItem(listItem.id)}
-                  />
-                  <div className="checked-details">
-                    <input 
-                    type="text" 
-                    name="checkedBy" 
-                    id="checked-by-input"
-                    placeholder="Enter your name"
-                    />
-                    {
-                      listItem.checked && listItem.checked_by && localStorage.getItem("accessLevel") === '1'? <p>Checked by: { listItem.checked_by }</p>: ''
-                    }
-                    <span 
-                      id="check-item"
-                      className="tick" 
-                      onClick={() => this.updateListItem(listItem.id)}>
-                    </span>
+                  <div className="item-checked-details" data-checked={ listItem.checked === 1 ? true : false } onClick = {() => this.checkItem(listItem.id)} >
+                    { listItem.checked ? <p className="promised-message">Promised!</p> : <p className="promised-message">I'll get this!</p> } 
+                    <div className="checked-details">
+                      <input 
+                      type="text" 
+                      name="checkedBy" 
+                      id="checked-by-input"
+                      placeholder="Enter your name"
+                      />
+                      {
+                        listItem.checked && listItem.checked_by && localStorage.getItem("accessLevel") === '1'? <p>by { listItem.checked_by }</p>: ''
+                      }
+                      <span 
+                        id="check-item"
+                        className="tick" 
+                        onClick={() => this.updateListItem(listItem.id)}>
+                      </span>
+                    </div>
                   </div>
+                </div>
               </div>
             )
           )}  
