@@ -2,7 +2,8 @@ const express = require('express'),
   app = express(),
   mysql = require('mysql'),
   cors = require('cors'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  restrictMiddleware = require("./restrict");;
 
 // make server object that contain port property and the value for our server.
 var server = {
@@ -19,9 +20,9 @@ app.use(cors())
 app.use(bodyParser.json());
 
 //use router
-app.use('/lists', listsRouter);
-app.use('/list_items', listItemsRouter);
-app.use('/auth', authRouter);
+app.use('/lists', restrictMiddleware, listsRouter);
+app.use('/list_items', restrictMiddleware, listItemsRouter);
+app.use('/auth', restrictMiddleware, authRouter);
 
 
 // starting the server

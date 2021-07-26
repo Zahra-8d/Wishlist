@@ -7,8 +7,17 @@ export default function Lists() {
   const [listCount, setListCount] = useState(0);
 
   const updateListCount = count => {
-    if (count !== this.state.listCount) {
-      fetch('/lists/list')
+    if (count !== listCount) {
+      fetch('/lists/list', {
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "accept": "application/json"
+        },
+        "body": JSON.stringify({
+            username: localStorage.getItem("username")
+        })
+      })
       .then(res => res.json())
       .then(res => {
         setLists(res.data)
@@ -22,13 +31,23 @@ export default function Lists() {
   }
 
   useEffect(() => {
-    fetch('/lists/list')
+    console.log(listCount)
+    fetch('/lists/list', {
+      "method": "POST",
+      "headers": {
+          "content-type": "application/json",
+          "accept": "application/json"
+      },
+      "body": JSON.stringify({
+          username: localStorage.getItem("username")
+      })
+    })
     .then(res => res.json())
     .then(res => {
       setLists(res.data)
       setListCount(res.data.length)
     });
-  }, [lists]);
+  }, [listCount]);
 
   return (
       <main id="all-lists">

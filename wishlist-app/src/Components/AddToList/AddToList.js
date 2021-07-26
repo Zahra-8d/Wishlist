@@ -40,7 +40,8 @@ const AddToList = (props) => {
                 id: id,
                 name: name.value,
                 price: price.value,
-                url: url.value
+                url: url.value,
+                username: localStorage.getItem("username")
             })
         })
         .then(response => response.json())

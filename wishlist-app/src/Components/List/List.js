@@ -49,7 +49,8 @@ class List extends React.Component {
           "accept": "application/json"
       },
       "body": JSON.stringify({
-        list_id: id
+        list_id: id,
+        username: localStorage.getItem("username")
       })
     })
     .then(response => response.json())
@@ -77,7 +78,8 @@ class List extends React.Component {
         },
         "body": JSON.stringify({
             id: listItemId,
-            checked_by: checked_by.value
+            checked_by: checked_by.value,
+            username: localStorage.getItem("username")
         })
       })
       .then(response => response.json())
@@ -105,7 +107,8 @@ class List extends React.Component {
             "accept": "application/json"
         },
         "body": JSON.stringify({
-            id: id
+            id: id,
+            username: localStorage.getItem("username")
         })
       })
       .then(response => response.json())

@@ -2,7 +2,7 @@ const express = require('express'),
     router = express.Router(),
     db = require('../connection.js');
 
-router.post('/login', function(req, res) {
+router.post('/login',  function(req, res) {
     let sql = `SELECT username, access FROM users WHERE username = ? AND DECODE(password, ?) = ? LIMIT 1`;
     db.query(sql, [req.body.username, process.env.DB_KEY, req.body.password], function(err, data, fields) {
         if (err) throw err;
@@ -15,6 +15,7 @@ router.post('/login', function(req, res) {
                 message: "User login data retrieved",
                 data: {
                     access: accessLevel,
+                    username: username
                 }
             })
         } else {

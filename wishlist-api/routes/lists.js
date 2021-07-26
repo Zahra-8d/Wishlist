@@ -3,7 +3,7 @@ const express = require('express'),
     db = require('../connection.js');
 
 // get all lists
-router.get('/list', function(req, res) {
+router.post('/list', function(req, res) {
     let sql = `SELECT id, name, description, UNIX_TIMESTAMP(date) as date FROM lists ORDER BY date DESC`;
     db.query(sql, function(err, data, fields) {
       if (err) throw err;

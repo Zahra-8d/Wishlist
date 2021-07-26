@@ -35,7 +35,8 @@ export default function AddList(props) {
             },
             "body": JSON.stringify({
                 name: name.value,
-                description: desc.value
+                description: desc.value,
+                username: localStorage.getItem("username")
             })
         })
         .then(response => response.json())

@@ -24,7 +24,9 @@ export default function App() {
     .then(response => response.json())
     .then(response => {
         if (response.data) {
+          console.log(response.data)
             localStorage.setItem("accessLevel", response.data.access || 0);
+            localStorage.setItem("username", response.data.username || '');
             setUser({
               username: response.data.username,
               accessLevel: response.data.accessLevel
@@ -63,7 +65,7 @@ export default function App() {
           </BrowserRouter>
         </div>
       ): (
-        <div class="login-page">
+        <div className="login-page">
           <a href="/" className="h1"><h1>Wishlist</h1></a>
           <LoginForm Login={Login} error={error} />
         </div>

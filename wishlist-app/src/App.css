@@ -126,6 +126,7 @@ h4, h5, h6 {
   padding: 2.125rem 1.75rem;
   text-align: center;
   transition: all .3s ease;
+  min-width: 200px;
 }
 
 .list-item-container {
