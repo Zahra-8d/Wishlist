@@ -42,7 +42,7 @@ class List extends React.Component {
 
   getListItemsById() {
     const { id } = this.props.match.params;
-    fetch("/list_items/list_by_id", {
+    fetch(`${process.env.REACT_APP_API_PATH}/list_items/list_by_id`, {
       "method": "POST",
       "headers": {
           "content-type": "application/json",
@@ -70,7 +70,7 @@ class List extends React.Component {
     const { id } = this.props.match.params;
     let checked_by = document.querySelector('#list-item-id-' + listItemId + ' #checked-by-input');
     if (listItemId && checked_by.value) {
-      fetch("/list_items/update", {
+      fetch(`${process.env.REACT_APP_API_PATH}/list_items/update`, {
         "method": "POST",
         "headers": {
             "content-type": "application/json",
@@ -100,7 +100,7 @@ class List extends React.Component {
 
   componentDidMount() {
       const { id } = this.props.match.params;
-      fetch("/lists/get_name", {
+      fetch(`${process.env.REACT_APP_API_PATH}/lists/get_name`, {
         "method": "POST",
         "headers": {
             "content-type": "application/json",

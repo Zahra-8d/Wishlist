@@ -30,7 +30,7 @@ const AddToList = (props) => {
             return;
         }
 
-        fetch("/list_items/new", {
+        fetch(`${process.env.REACT_APP_API_PATH}/list_items/new`, {
             "method": "POST",
             "headers": {
                 "content-type": "application/json",

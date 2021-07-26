@@ -27,7 +27,7 @@ export default function AddList(props) {
             return;
         }
 
-        fetch("/lists/new", {
+        fetch(`${process.env.REACT_APP_API_PATH}/lists/new`, {
             "method": "POST",
             "headers": {
                 "content-type": "application/json",

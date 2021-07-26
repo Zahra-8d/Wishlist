@@ -10,7 +10,7 @@ export default function App() {
   const [error, setError] = useState("");
 
   const Login = details => {
-    fetch("/auth/login", {
+    fetch(`${process.env.REACT_APP_API_PATH}/auth/login`, {
       "method": "POST",
       "headers": {
           "content-type": "application/json",
@@ -24,7 +24,6 @@ export default function App() {
     .then(response => response.json())
     .then(response => {
         if (response.data) {
-          console.log(response.data)
             localStorage.setItem("accessLevel", response.data.access || 0);
             localStorage.setItem("username", response.data.username || '');
             setUser({

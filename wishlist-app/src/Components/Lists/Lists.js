@@ -8,7 +8,7 @@ export default function Lists() {
 
   const updateListCount = count => {
     if (count !== listCount) {
-      fetch('/lists/list', {
+      fetch(`${process.env.REACT_APP_API_PATH}/lists/list`, {
         "method": "POST",
         "headers": {
             "content-type": "application/json",
@@ -32,7 +32,7 @@ export default function Lists() {
 
   useEffect(() => {
     console.log(listCount)
-    fetch('/lists/list', {
+    fetch(`${process.env.REACT_APP_API_PATH}/lists/list`, {
       "method": "POST",
       "headers": {
           "content-type": "application/json",
