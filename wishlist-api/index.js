@@ -19,9 +19,9 @@ app.use(cors())
 app.use(bodyParser.json());
 
 //use router
-app.use('/lists', listsRouter);
-app.use('/list_items', listItemsRouter);
-app.use('/auth', authRouter);
+app.use('//wishlistapi.pastel.digital/lists', listsRouter);
+app.use('//wishlistapi.pastel.digital//list_items', listItemsRouter);
+app.use('//wishlistapi.pastel.digital//auth', authRouter);
 
 
 // starting the server
