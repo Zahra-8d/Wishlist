@@ -27,7 +27,7 @@ export default function Lists() {
   }
 
   const openList = listId => {
-    window.location.assign(`${process.env.REACT_APP_API_PATH}/list/${listId}`);
+    window.location.assign(`/list/${listId}`);
   }
 
   useEffect(() => {
