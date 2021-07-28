@@ -193,6 +193,7 @@ input {
   width: 100%;
   padding: 0 10px;
   font-weight: 100;
+  color: #000;
 }
 
 .logout {
