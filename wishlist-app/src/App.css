@@ -123,10 +123,11 @@ h4, h5, h6 {
   background-color: #fff;
   box-shadow: 0 0 1rem .2rem rgba(0,0,0,.07);
   border-radius: 10px;
-  padding: 2.125rem 1.75rem;
+  padding: 2.125rem;
   text-align: center;
   transition: all .3s ease;
   min-width: 200px;
+  position: relative;
 }
 
 .list-item-container {
@@ -137,11 +138,20 @@ h4, h5, h6 {
   text-align: center;
   transition: all .3s ease;
   display: flex;
+  position: relative;
+}
+
+.cross-icon {
+  position: absolute;
+  right: 4px;
+  width: 25px;
+  cursor: pointer;
+  height: 25px;
 }
 
 #add-list {
   display: block;
-  margin: 4em 0;
+  margin: 2em 0;
 }
 
 #add-list-item {
@@ -185,6 +195,12 @@ h4, h5, h6 {
   max-width: 500px;
   margin: auto;
   margin-bottom: 4em;
+}
+
+.list-container img {
+  position: absolute;
+  right: 6px;
+  top: 0;
 }
 
 input {

@@ -31,7 +31,6 @@ export default function Lists() {
   }
 
   useEffect(() => {
-    console.log(listCount)
     fetch(`${process.env.REACT_APP_API_PATH}/lists/list`, {
       "method": "POST",
       "headers": {

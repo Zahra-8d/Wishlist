@@ -12,6 +12,7 @@ class List extends React.Component {
       ListItemCheckedCount: 0,
       ListItemCount: 0,
       listName: '',
+      unloaded: true
     }
   }
 
@@ -40,6 +41,28 @@ class List extends React.Component {
     }
   }
 
+  deleteList(listItemId) {
+    const { listId } = this.props.match.params;
+    fetch(`${process.env.REACT_APP_API_PATH}/list_items/delete`, {
+      "method": "POST",
+      "headers": {
+          "content-type": "application/json",
+          "accept": "application/json"
+      },
+      "body": JSON.stringify({
+          id: listItemId,
+          username: localStorage.getItem("username")
+      })
+    })
+    .then(response => response.json())
+    .then(response => {
+        this.updateListItemCount(this.state.listItemCount - 1, listId);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  }
+
   getListItemsById() {
     const { id } = this.props.match.params;
     fetch(`${process.env.REACT_APP_API_PATH}/list_items/list_by_id`, {
@@ -55,11 +78,18 @@ class List extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-      this.setState({ 
-        listItems: response.items, 
-        ListItemCheckedCount: response.items.filter(x => x.checked === 1).length, 
-        listItemCount: response.items.length 
-      })
+      if (response.items) {
+        this.setState({ 
+          listItems: response.items, 
+          ListItemCheckedCount: response.items.filter(x => x.checked === 1).length, 
+          listItemCount: response.items.length,
+          unloaded: false
+        })
+      } else {
+        this.setState({ 
+          unloaded: false
+        })
+      }
     })
     .catch(err => {
         console.log(err);
@@ -126,11 +156,12 @@ class List extends React.Component {
     return (
       <div>
         <h2>{this.state.listName}</h2>
-        <h3>{ this.state.listItems.length === 0 ? 'No items on the list!' : '' }</h3>
+        <h3>{ this.state.listItems.length === 0 && !this.state.unloaded ? 'No items on the list!' : '' }</h3>
         <main id="all-list-items">
           {this.state.listItems.map(listItem =>
             (
               <div key={listItem.id} id={'list-item-id-' + listItem.id} className="list-item-container">
+                <img src="/cross.png" alt="" className="cross-icon"  onClick = {() => this.deleteList(listItem.id)}/>
                 <div className="inner-container list-instance">
                   <div className="list-item-name">
                     <a href={listItem.url} target="_blank"><h3>{listItem.name}</h3></a> 

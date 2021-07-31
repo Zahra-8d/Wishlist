@@ -87,7 +87,14 @@ router.get('/list_all', function(req, res) {
           counter += 1;
         }
       });
-    })
+
+      if (item_count == 0) {
+        res.json({
+          status: 200,
+          message: "No list items"
+        })
+      }
+    });
 });
 
 // set list item to checked
@@ -100,6 +107,18 @@ router.post('/update', function(req, res) {
         message: "List item updated successfully"
         })
     })
+});
+
+// delete list item to checked
+router.post('/delete', function(req, res) {
+  let sql = `DELETE FROM list_items WHERE id = ` + req.body.id; 
+  db.query(sql, function(err, data, fields) {
+      if (err) throw err;
+      res.json({
+      status: 200,
+      message: "List item deleted successfully"
+      })
+  })
 });
 
 // create new list item

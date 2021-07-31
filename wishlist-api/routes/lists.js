@@ -28,6 +28,19 @@ router.post('/get_name', function(req, res) {
     })
 });
 
+// delete list item to checked
+router.post('/delete', function(req, res) {
+  let sql = `DELETE FROM lists WHERE id = ` + req.body.id; 
+  db.query(sql, function(err, data, fields) {
+        if (err) throw err;
+        res.json({
+        status: 200,
+        message: "List item deleted successfully"
+      })
+  })
+});
+
+
 // create new list
 router.post('/new', function(req, res) {
     let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
