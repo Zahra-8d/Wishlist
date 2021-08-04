@@ -15,8 +15,20 @@ const listsRouter = require('./routes/lists');
 const listItemsRouter = require('./routes/listItems');
 const authRouter = require('./routes/auth');
 
+// cors whitelist
+const whitelist = ['https://wishlist.pastel.digital/']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 // use the modules
-app.use(cors())
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 //use router

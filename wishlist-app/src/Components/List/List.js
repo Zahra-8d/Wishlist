@@ -161,7 +161,9 @@ class List extends React.Component {
           {this.state.listItems.map(listItem =>
             (
               <div key={listItem.id} id={'list-item-id-' + listItem.id} className="list-item-container">
-                <img src="/cross.png" alt="" className="cross-icon"  onClick = {() => this.deleteList(listItem.id)}/>
+                {
+                  localStorage.getItem("accessLevel") === '1'? <img src="/cross.png" alt="" className="cross-icon" onClick = {() => this.deleteList(listItem.id)}/>: ''
+                }
                 <div className="inner-container list-instance">
                   <div className="list-item-name">
                     <a href={listItem.url} target="_blank"><h3>{listItem.name}</h3></a> 
