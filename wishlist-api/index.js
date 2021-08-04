@@ -16,7 +16,7 @@ const listItemsRouter = require('./routes/listItems');
 const authRouter = require('./routes/auth');
 
 // cors whitelist
-const whitelist = ['https://wishlist.pastel.digital/']
+const whitelist = ['https://wishlist.pastel.digital']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
