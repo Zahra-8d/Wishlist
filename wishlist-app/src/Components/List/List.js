@@ -156,6 +156,7 @@ class List extends React.Component {
     return (
       <div>
         <h2>{this.state.listName}</h2>
+        <h3>{ this.state.unloaded ? 'Items loading, please wait...' : '' }</h3>
         <h3>{ this.state.listItems.length === 0 && !this.state.unloaded ? 'No items on the list!' : '' }</h3>
         <main id="all-list-items">
           {this.state.listItems.map(listItem =>
